@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NutraVie — 100% Bio Skincare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#2D4A35;--green-md:#3D6147;--green-lt:#C8D9C5;--green-xlt:#EBF0E8;
+  --beige:#F5EFE4;--beige-dk:#E8DCC8;--brown:#7B4F2E;--brown-dk:#5C3820;--brown-lt:#C4956A;
+  --cream:#FAF7F2;--text:#1E2E22;--muted:#6B7C6E;--white:#FFFFFF;
+  --border:rgba(45,74,53,0.15);--shadow:0 8px 40px rgba(45,74,53,0.12);--r:6px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;line-height:1.6}
+[dir="rtl"]{font-family:'DM Sans',Tahoma,sans-serif}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--beige)}::-webkit-scrollbar-thumb{background:var(--green-md);border-radius:10px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+@keyframes badgePop{0%{transform:scale(0)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes shimmer{0%{opacity:.6}50%{opacity:1}100%{opacity:.6}}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal-l{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
+.reveal-r{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.on,.reveal-l.on,.reveal-r.on{opacity:1;transform:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:68px;background:rgba(250,247,242,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.sc{box-shadow:var(--shadow)}
+.logo{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;text-decoration:none;letter-spacing:.03em}
+.logo .n{color:var(--brown)}.logo .v{color:var(--green)}
+.nav-r{display:flex;align-items:center;gap:.75rem}
+.lb{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--muted);padding:.3rem .65rem;border-radius:20px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.lb.on,.lb:hover{background:var(--green);color:var(--white);border-color:var(--green)}
+.cbt{position:relative;background:var(--green);color:var(--white);border:none;cursor:pointer;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .15s;font-size:1.1rem}
+.cbt:hover{background:var(--green-md);transform:scale(1.08)}
+.cbadge{position:absolute;top:-4px;right:-4px;background:var(--brown);color:var(--white);font-size:.6rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;border:2px solid var(--cream);animation:badgePop .3s ease}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:5rem 3rem 5rem;background:linear-gradient(140deg,var(--green) 0%,#1e3828 100%);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(196,149,106,.08) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:100px;background:var(--cream);clip-path:ellipse(55% 100% at 50% 100%)}
+.hero-in{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-txt{animation:fadeUp .9s ease both}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:.4rem 1rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green-lt);margin-bottom:1.75rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:700;line-height:1.1;color:var(--white);margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--brown-lt)}
+.hero-p{font-size:1rem;line-height:1.8;color:rgba(255,255,255,.7);max-width:440px;margin-bottom:2.5rem}
+.hact{display:flex;gap:1rem;flex-wrap:wrap}
+.bh{background:var(--beige);color:var(--green);padding:.9rem 2.2rem;border-radius:var(--r);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all .25s;font-family:'DM Sans',sans-serif}
+.bh:hover{background:var(--white);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.bho{background:transparent;color:var(--white);padding:.9rem 2.2rem;border-radius:var(--r);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:1px solid rgba(255,255,255,.4);cursor:pointer;text-decoration:none;display:inline-block;transition:all .25s;font-family:'DM Sans',sans-serif}
+.bho:hover{background:rgba(255,255,255,.1);transform:translateY(-3px)}
+.hv{display:flex;justify-content:center;align-items:center;animation:float 4s ease-in-out infinite;position:relative;z-index:1}
+.hframe{width:100%;max-width:420px;aspect-ratio:3/4;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;backdrop-filter:blur(4px)}
+/* ✏️ HERO IMAGE: Replace .hph with: <img src="hero.jpg" style="width:100%;height:100%;object-fit:cover" alt="NutraVie"> */
+.hph{display:flex;flex-direction:column;align-items:center;gap:1rem;color:rgba(255,255,255,.35);font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:2rem}
+.hstats{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;gap:2rem;background:rgba(255,255,255,.97);border-radius:12px;padding:1rem 1.5rem;box-shadow:0 8px 32px rgba(0,0,0,.15);white-space:nowrap}
+.sn{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--green);display:block}
+.sl{font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ── TRUST ── */
+.trust{background:var(--green);padding:1rem 3rem;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+.ti{display:flex;align-items:center;gap:.55rem;font-size:.71rem;letter-spacing:.13em;text-transform:uppercase;color:var(--green-lt)}
+
+/* ── COMMON ── */
+.sw{max-width:1200px;margin:0 auto}
+.slbl{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem;font-weight:500}
+.stit{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;line-height:1.2;color:var(--text)}
+.stit .n{color:var(--brown)}.stit .v{color:var(--green)}.stit em{font-style:italic;color:var(--green-md)}
+
+/* ── PRODUCTS ── */
+#products{padding:5rem 3rem;background:var(--cream)}
+.ph{text-align:center;margin-bottom:3.5rem}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:1.5rem}
+.pc{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .3s,box-shadow .3s;position:relative}
+.pc:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.pbadge{position:absolute;top:12px;left:12px;z-index:2;background:var(--green);color:var(--white);font-size:.61rem;letter-spacing:.13em;text-transform:uppercase;padding:.28rem .65rem;border-radius:30px;font-weight:500}
+[dir="rtl"] .pbadge{left:auto;right:12px}
+.pimg{aspect-ratio:1;background:var(--beige);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.pimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.pc:hover .pimg img{transform:scale(1.06)}
+/* ✏️ PRODUCT PLACEHOLDER — replace each .pph with <img src="your-photo.jpg" alt="..."> */
+.pph{display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--muted);font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;text-align:center;padding:1rem}
+.pph svg{opacity:.25}
+.pbody{padding:1.25rem}
+.ptag{font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:.4rem;font-weight:500}
+.pname{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:700;margin-bottom:.2rem}
+.pname .n{color:var(--brown)}.pname .v{color:var(--green)}
+.pvol{font-size:.73rem;color:var(--muted);margin-bottom:.7rem}
+/* ✏️ PRODUCT DESCRIPTION — edit each .pdesc */
+.pdesc{font-size:.81rem;line-height:1.7;color:var(--muted);margin-bottom:1.2rem;min-height:68px}
+.pfoot{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--border);gap:.5rem;flex-wrap:wrap}
+.pprice{font-family:'Playfair Display',serif;font-size:1.28rem;font-weight:700;color:var(--brown)}
+.pprice span{font-size:.68rem;font-family:'DM Sans',sans-serif;color:var(--muted)}
+.qw{display:flex;align-items:center;gap:5px}
+.qb{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--text)}
+.qb:hover{background:var(--green);color:var(--white);border-color:var(--green)}
+.qv{font-size:.83rem;font-weight:500;min-width:20px;text-align:center}
+.ab{background:var(--green);color:var(--white);border:none;cursor:pointer;padding:.52rem .9rem;border-radius:var(--r);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;font-weight:500;transition:all .2s;white-space:nowrap;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:.35rem}
+.ab:hover{background:var(--green-md);transform:scale(1.03)}
+.ab.done{background:var(--brown);animation:pulse .4s ease}
+
+/* ── ABOUT ── */
+#about{padding:5rem 3rem;background:var(--beige)}
+.abin{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.avis{aspect-ratio:1;background:var(--beige-dk);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--border);position:relative}
+.avis img{width:100%;height:100%;object-fit:cover;display:block}
+/* ✏️ ABOUT IMAGE: replace .abph with <img src="about.jpg" alt="NutraVie ingredients"> */
+.abph{display:flex;flex-direction:column;align-items:center;gap:.75rem;color:var(--muted);font-size:.73rem;letter-spacing:.09em;text-transform:uppercase;text-align:center}
+.abph svg{opacity:.28}
+.cring{position:absolute;top:-16px;right:-16px;width:88px;height:88px;border-radius:50%;background:var(--green);color:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;text-align:center;line-height:1.4;border:3px solid var(--white);box-shadow:var(--shadow)}
+[dir="rtl"] .cring{right:auto;left:-16px}
+.act p{font-size:.93rem;line-height:1.85;color:var(--muted);margin:1.25rem 0 2rem}
+.pills{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.pill{background:var(--white);border-radius:10px;padding:1rem 1.1rem;border-left:3px solid var(--green);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+[dir="rtl"] .pill{border-left:none;border-right:3px solid var(--green)}
+.pill strong{display:block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--green);margin-bottom:.28rem}
+.pill span{font-size:.8rem;color:var(--muted);line-height:1.5}
+
+/* ── WHY ── */
+#why{padding:5rem 3rem;background:var(--cream)}
+.wh{text-align:center;margin-bottom:3rem}
+.wg{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.5rem}
+.wc{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:2rem 1.5rem;text-align:center;transition:transform .3s,box-shadow .3s}
+.wc:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.wi{width:56px;height:56px;border-radius:50%;background:var(--green-xlt);border:1px solid var(--green-lt);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.4rem}
+.wc h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.wc p{font-size:.8rem;line-height:1.7;color:var(--muted)}
+
+/* ── TESTIMONIALS ── */
+#testi{padding:5rem 3rem;background:var(--green)}
+.testh{text-align:center;margin-bottom:3rem}
+.testh .slbl{color:var(--green-lt)}
+.testh .stit{color:var(--white)}
+.tg{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1.5rem}
+.tc{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:1.75rem}
+.stars{color:#F5C842;margin-bottom:.8rem;letter-spacing:2px}
+.tc p{font-family:'Playfair Display',serif;font-style:italic;font-size:.98rem;line-height:1.7;color:rgba(255,255,255,.85);margin-bottom:1rem}
+.tc cite{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--green-lt)}
+
+/* ── CONTACT ── */
+#contact{padding:5rem 3rem;background:var(--beige);text-align:center}
+.cacts{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+.bwa{background:#25D366;color:var(--white);padding:.9rem 2rem;border-radius:var(--r);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:all .25s;font-family:'DM Sans',sans-serif}
+.bwa:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.35)}
+.big{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:var(--white);padding:.9rem 2rem;border-radius:var(--r);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:all .25s;font-family:'DM Sans',sans-serif}
+.big:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(220,39,67,.35)}
+
+/* ── FOOTER ── */
+footer{background:var(--text);color:rgba(255,255,255,.5);padding:3rem}
+.fin{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+.fb .logo{font-size:1.5rem;display:inline-block;margin-bottom:1rem}
+.fb p{font-size:.8rem;line-height:1.7;max-width:280px}
+.fc h4{color:var(--white);font-size:.73rem;letter-spacing:.13em;text-transform:uppercase;margin-bottom:1rem;font-weight:500}
+.fc ul{list-style:none}.fc ul li{margin-bottom:.6rem}
+.fc ul li a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;transition:color .2s}
+.fc ul li a:hover{color:var(--green-lt)}
+.fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.73rem}
+.slinks{display:flex;gap:.75rem}
+.slink{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;font-size:.85rem;transition:all .2s}
+.slink:hover{background:var(--green);border-color:var(--green);color:var(--white)}
+
+/* ── CART DRAWER ── */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:299;opacity:0;pointer-events:none;transition:opacity .3s}
+.ov.show{opacity:1;pointer-events:all}
+.cd{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:var(--white);z-index:300;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.15)}
+.cd.open{transform:translateX(0)}
+[dir="rtl"] .cd{right:auto;left:0;transform:translateX(-100%)}
+[dir="rtl"] .cd.open{transform:none}
+.cdh{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.cdh h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700}
+.xb{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--text)}
+.xb:hover{background:var(--green);color:var(--white);border-color:var(--green)}
+.citems{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.cemp{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1rem;color:var(--muted);text-align:center}
+.cemp svg{opacity:.2}
+.citem{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:center}
+.citem:last-child{border-bottom:none}
+.ciimg{width:64px;height:64px;border-radius:8px;background:var(--beige);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--muted);text-align:center;letter-spacing:.06em;text-transform:uppercase}
+.ciimg img{width:100%;height:100%;object-fit:cover}
+.cinfo{flex:1}
+.ciname{font-weight:500;font-size:.88rem;margin-bottom:.2rem}
+.ciprice{font-size:.8rem;color:var(--brown);font-weight:500}
+.ciq{display:flex;align-items:center;gap:5px;margin-top:.45rem}
+.ciqb{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--text)}
+.ciqb:hover{background:var(--green);color:var(--white);border-color:var(--green)}
+.ciqv{font-size:.8rem;font-weight:500;min-width:18px;text-align:center}
+.rmb{font-size:.66rem;color:var(--muted);background:none;border:none;cursor:pointer;margin-left:auto;letter-spacing:.05em;transition:color .2s}
+.rmb:hover{color:#c0392b}
+.cdf{padding:1.25rem 1.5rem;border-top:1px solid var(--border);background:var(--cream)}
+.fr{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-bottom:.45rem}
+.tr{display:flex;justify-content:space-between;font-weight:700;font-size:1.05rem;color:var(--text);margin:.7rem 0 .45rem}
+.codb{background:var(--green-xlt);border:1px solid var(--green-lt);border-radius:6px;padding:.5rem 1rem;font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--green);text-align:center;margin-bottom:1rem;font-weight:500}
+.chkb{width:100%;background:var(--green);color:var(--white);border:none;cursor:pointer;padding:1rem;border-radius:var(--r);font-size:.83rem;letter-spacing:.11em;text-transform:uppercase;font-weight:500;display:flex;align-items:center;justify-content:center;gap:.6rem;font-family:'DM Sans',sans-serif;transition:all .2s}
+.chkb:hover{background:var(--green-md);transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,74,53,.3)}
+
+/* ── MODAL ── */
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:400;display:none;align-items:center;justify-content:center;padding:1rem}
+.mo.show{display:flex}
+.mbox{background:var(--white);border-radius:16px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;animation:scaleIn .3s ease}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:1}
+.mh h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700}
+.mb{padding:1.5rem}
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.73rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:.38rem;font-weight:500}
+.fg input,.fg select,.fg textarea{width:100%;padding:.72rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--text);background:var(--cream);transition:border-color .2s;outline:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--green);background:var(--white)}
+.fg textarea{resize:vertical;min-height:75px}
+.mos{background:var(--beige);border-radius:8px;padding:1rem;margin-bottom:1.25rem;font-size:.8rem}
+.mos .mrow{display:flex;justify-content:space-between;padding:.28rem 0}
+.mos .mtot{font-weight:700;font-size:.93rem;border-top:1px solid var(--border);padding-top:.45rem;margin-top:.28rem}
+.subb{width:100%;background:var(--green);color:var(--white);border:none;cursor:pointer;padding:1rem;border-radius:var(--r);font-size:.83rem;letter-spacing:.11em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.subb:hover{background:var(--green-md);transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,74,53,.3)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:var(--white);padding:.72rem 1.5rem;border-radius:30px;font-size:.8rem;font-weight:500;z-index:500;transition:transform .3s ease;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 1.25rem}
+  .hero{padding:5rem 1.5rem 4rem}
+  .hero-in{grid-template-columns:1fr}.hv{order:-1;margin-bottom:.5rem}
+  .hframe{max-width:100%;aspect-ratio:4/3}.hstats{gap:1rem;padding:.75rem 1rem}
+  .abin{grid-template-columns:1fr;gap:2rem}
+  #products,#about,#why,#testi,#contact{padding:3.5rem 1.5rem}
+  .trust{padding:.75rem 1rem;gap:1rem}
+  .fin{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .hero h1{font-size:2.2rem}.pills{grid-template-columns:1fr}
+  .cd{width:100vw}.hstats{gap:.5rem;bottom:.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo"><span class="n">Nutra</span><span class="v">Vie</span></a>
+  <div class="nav-r">
+    <button class="lb on" onclick="setLang('en',this)">EN</button>
+    <button class="lb" onclick="setLang('fr',this)">FR</button>
+    <button class="lb" onclick="setLang('ar',this)">ع</button>
+    <button class="cbt" onclick="toggleCart()">🛍<span class="cbadge" id="cbc">0</span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-in">
+    <div class="hero-txt">
+      <div class="eyebrow">🌿 <span data-k="cert">100% Certified Bio Skincare</span></div>
+      <h1 data-k="h1">Nature's <em>purest</em> formula<br>for your skin</h1>
+      <p class="hero-p" data-k="hs">Crafted from 100% organic certified ingredients — safe for all skin types, babies &amp; mothers-to-be. Gentle science, visible results.</p>
+      <div class="hact">
+        <a href="#products" class="bh" data-k="shop">Shop Now</a>
+        <a href="#about" class="bho" data-k="story">Our Story</a>
+      </div>
+    </div>
+    <div class="hv">
+      <div class="hframe">
+        <!-- ✏️ HERO IMAGE: Replace this div with:
+             <img src="hero.jpg" style="width:100%;height:100%;object-fit:cover" alt="NutraVie"> -->
+        <div class="hph">
+          <svg width="52" height="52" fill="none" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M4 34l12-10 8 7 8-9 12 14" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          <span>Hero lifestyle photo<br>800×1000px</span>
+        </div>
+      </div>
+      <div class="hstats">
+        <div><span class="sn">100%</span><span class="sl" data-k="org">Organic</span></div>
+        <div><span class="sn">5</span><span class="sl" data-k="prods">Products</span></div>
+        <div><span class="sn">✓</span><span class="sl" data-k="cert2">Certified</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="ti">🌿 <span data-k="t1">100% Bio Certified</span></div>
+  <div class="ti">👶 <span data-k="t2">Safe for Babies</span></div>
+  <div class="ti">🤰 <span data-k="t3">Safe During Pregnancy</span></div>
+  <div class="ti">🌍 <span data-k="t4">All Skin Types</span></div>
+  <div class="ti">📦 <span data-k="t5">Cash on Delivery</span></div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="ph reveal">
+    <p class="slbl" data-k="col">Our Collection</p>
+    <h2 class="stit"><span class="n">Nutra</span><span class="v">Vie</span> — <em data-k="five">Five Essentials</em></h2>
+  </div>
+  <div class="pgrid sw">
+
+    <!-- PRODUCT 1 — SUNSCREEN -->
+    <div class="pc reveal">
+      <div class="pbadge" data-k="spf">SPF 50+</div>
+      <div class="pimg">
+        <!-- ✏️ P1 IMAGE (Sunscreen SPF50+): Replace with <img src="sunscreen.jpg" alt="Sunscreen"> -->
+        <div class="pph"><svg width="36" height="36" fill="none" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M4 34l12-10 8 7 8-9 12 14" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><span>Sunscreen photo<br>600×600px</span></div>
+      </div>
+      <div class="pbody">
+        <p class="ptag" data-k="suntag">Sun Protection</p>
+        <h3 class="pname"><span class="n">Nutra</span><span class="v">Vie</span> Sunscreen</h3>
+        <p class="pvol">50 ml</p>
+        <!-- ✏️ P1 DESCRIPTION: edit text below -->
+        <p class="pdesc" data-k="d1">Broad-spectrum mineral SPF 50+. Ultra-light bio formula — no white cast, safe from birth. Shields while nourishing.</p>
+        <div class="pfoot">
+          <p class="pprice">130 <span>DH</span></p>
+          <div class="qw"><button class="qb" onclick="chQ('sun',-1)">−</button><span class="qv" id="q-sun">1</span><button class="qb" onclick="chQ('sun',1)">+</button></div>
+          <button class="ab" id="ab-sun" onclick="addCart('sun','Sunscreen SPF50+',130)">🛒 <span data-k="add">Add</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT 2 — CLEANSER -->
+    <div class="pc reveal">
+      <div class="pbadge" data-k="gentle">Gentle</div>
+      <div class="pimg">
+        <!-- ✏️ P2 IMAGE (Cleanser): Replace with <img src="cleanser.jpg" alt="Cleanser"> -->
+        <div class="pph"><svg width="36" height="36" fill="none" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M4 34l12-10 8 7 8-9 12 14" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><span>Cleanser photo<br>600×600px</span></div>
+      </div>
+      <div class="pbody">
+        <p class="ptag" data-k="clstag">Daily Cleansing</p>
+        <h3 class="pname"><span class="n">Nutra</span><span class="v">Vie</span> Cleanser</h3>
+        <p class="pvol">50 ml</p>
+        <!-- ✏️ P2 DESCRIPTION -->
+        <p class="pdesc" data-k="d2">Sulfate-free bio cleanser that melts impurities without stripping moisture. Ideal for sensitive and baby skin.</p>
+        <div class="pfoot">
+          <p class="pprice">75 <span>DH</span></p>
+          <div class="qw"><button class="qb" onclick="chQ('cls',-1)">−</button><span class="qv" id="q-cls">1</span><button class="qb" onclick="chQ('cls',1)">+</button></div>
+          <button class="ab" id="ab-cls" onclick="addCart('cls','Cleanser',75)">🛒 <span data-k="add">Add</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT 3 — NIGHT CREAM -->
+    <div class="pc reveal">
+      <div class="pbadge" data-k="night">Night Repair</div>
+      <div class="pimg">
+        <!-- ✏️ P3 IMAGE (Night Cream): Replace with <img src="night-cream.jpg" alt="Night Cream"> -->
+        <div class="pph"><svg width="36" height="36" fill="none" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M4 34l12-10 8 7 8-9 12 14" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><span>Night Cream photo<br>600×600px</span></div>
+      </div>
+      <div class="pbody">
+        <p class="ptag" data-k="nighttag">Night Repair</p>
+        <h3 class="pname"><span class="n">Nutra</span><span class="v">Vie</span> Night Cream</h3>
+        <p class="pvol">50 ml</p>
+        <!-- ✏️ P3 DESCRIPTION -->
+        <p class="pdesc" data-k="d3">Rich bio actives work overnight to restore and plump. Wake up to visibly softer, more radiant skin every morning.</p>
+        <div class="pfoot">
+          <p class="pprice">65 <span>DH</span></p>
+          <div class="qw"><button class="qb" onclick="chQ('nc',-1)">−</button><span class="qv" id="q-nc">1</span><button class="qb" onclick="chQ('nc',1)">+</button></div>
+          <button class="ab" id="ab-nc" onclick="addCart('nc','Night Cream',65)">🛒 <span data-k="add">Add</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT 4 — DEODORANT -->
+    <div class="pc reveal">
+      <div class="pbadge" data-k="alum">Alum-Free</div>
+      <div class="pimg">
+        <!-- ✏️ P4 IMAGE (Deodorant Baume): Replace with <img src="deodorant.jpg" alt="Déo Baume"> -->
+        <div class="pph"><svg width="36" height="36" fill="none" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M4 34l12-10 8 7 8-9 12 14" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><span>Deodorant photo<br>600×600px</span></div>
+      </div>
+      <div class="pbody">
+        <p class="ptag" data-k="dtag">Body Care</p>
+        <h3 class="pname"><span class="n">Nutra</span><span class="v">Vie</span> Déo Baume</h3>
+        <p class="pvol">30 ml</p>
+        <!-- ✏️ P4 DESCRIPTION -->
+        <p class="pdesc" data-k="d4">Aluminum-free bio baume that neutralizes odor naturally. Long-lasting freshness, safe for the most sensitive skin.</p>
+        <div class="pfoot">
+          <p class="pprice">75 <span>DH</span></p>
+          <div class="qw"><button class="qb" onclick="chQ('deo',-1)">−</button><span class="qv" id="q-deo">1</span><button class="qb" onclick="chQ('deo',1)">+</button></div>
+          <button class="ab" id="ab-deo" onclick="addCart('deo','Déo Baume',75)">🛒 <span data-k="add">Add</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT 5 — HAIR OIL -->
+    <div class="pc reveal">
+      <div class="pbadge" data-k="hair">Hair Growth</div>
+      <div class="pimg">
+        <!-- ✏️ P5 IMAGE (Hair Growth Oil): Replace with <img src="hair-oil.jpg" alt="Hair Growth Oil"> -->
+        <div class="pph"><svg width="36" height="36" fill="none" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M4 34l12-10 8 7 8-9 12 14" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><span>Hair Oil photo<br>600×600px</span></div>
+      </div>
+      <div class="pbody">
+        <p class="ptag" data-k="hairtag">Hair Care</p>
+        <h3 class="pname"><span class="n">Nutra</span><span class="v">Vie</span> Hair Oil</h3>
+        <p class="pvol">50 ml</p>
+        <!-- ✏️ P5 DESCRIPTION -->
+        <p class="pdesc" data-k="d5">Potent blend of bio-certified oils that stimulates growth and nourishes the scalp from root to tip. Visible results in weeks.</p>
+        <div class="pfoot">
+          <p class="pprice">95 <span>DH</span></p>
+          <div class="qw"><button class="qb" onclick="chQ('ho',-1)">−</button><span class="qv" id="q-ho">1</span><button class="qb" onclick="chQ('ho',1)">+</button></div>
+          <button class="ab" id="ab-ho" onclick="addCart('ho','Hair Growth Oil',95)">🛒 <span data-k="add">Add</span></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="abin">
+    <div class="avis reveal-l">
+      <!-- ✏️ ABOUT IMAGE: Replace .abph with <img src="about.jpg" alt="NutraVie ingredients"> -->
+      <div class="abph"><svg width="52" height="52" fill="none" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M4 34l12-10 8 7 8-9 12 14" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><span>Brand / ingredients<br>lifestyle photo</span></div>
+      <div class="cring">Bio<br>✓<br>Certified</div>
+    </div>
+    <div class="act reveal-r">
+      <p class="slbl" data-k="slb2">Our Story</p>
+      <h2 class="stit" data-k="at">Born from <em>nature</em>, backed by science</h2>
+      <!-- ✏️ ABOUT DESCRIPTION: edit text below -->
+      <p data-k="ad">NutraVie was born from a belief that skincare should never compromise. Every formula uses 100% certified bio ingredients — no fillers, no synthetics, no shortcuts. Just the purest actives your skin deserves.</p>
+      <div class="pills">
+        <div class="pill"><strong data-k="p1t">100% Bio</strong><span data-k="p1d">Certified organic, ethically sourced</span></div>
+        <div class="pill"><strong data-k="p2t">Certified Safe</strong><span data-k="p2d">Tested for babies &amp; pregnant women</span></div>
+        <div class="pill"><strong data-k="p3t">All Skin Types</strong><span data-k="p3d">From newborns to mature skin</span></div>
+        <div class="pill"><strong data-k="p4t">Clean Formula</strong><span data-k="p4d">Free from parabens &amp; sulfates</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="wh reveal"><p class="slbl" data-k="wlbl">Why NutraVie</p><h2 class="stit" data-k="wtit">Skincare you can truly <em>trust</em></h2></div>
+  <div class="wg">
+    <div class="wc reveal"><div class="wi">🌿</div><h3 data-k="w1t">100% Organic</h3><p data-k="w1d">Every ingredient carries full bio certification. You know exactly what's on your skin.</p></div>
+    <div class="wc reveal"><div class="wi">👶</div><h3 data-k="w2t">Baby Safe</h3><p data-k="w2d">Gentle enough for newborns and mothers-to-be — our highest standard of safety.</p></div>
+    <div class="wc reveal"><div class="wi">🔬</div><h3 data-k="w3t">Science-Backed</h3><p data-k="w3d">Bio actives clinically selected for efficacy. Results you can see and feel.</p></div>
+    <div class="wc reveal"><div class="wi">📦</div><h3 data-k="w4t">Cash on Delivery</h3><p data-k="w4d">Order with full confidence. Pay only when your NutraVie arrives at your door.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi">
+  <div class="testh reveal"><p class="slbl" data-k="tlbl">Testimonials</p><h2 class="stit" data-k="ttit">What our customers say</h2></div>
+  <!-- ✏️ Replace with real customer reviews -->
+  <div class="tg">
+    <div class="tc reveal"><div class="stars">★★★★★</div><p data-k="r1">"The sunscreen is incredible — no white cast, safe for my baby. Finally a brand I trust."</p><cite>— Fatima R., Casablanca</cite></div>
+    <div class="tc reveal"><div class="stars">★★★★★</div><p data-k="r2">"Used the night cream throughout my pregnancy. My skin has never looked better."</p><cite>— Nadia B., Rabat</cite></div>
+    <div class="tc reveal"><div class="stars">★★★★★</div><p data-k="r3">"The hair oil is a miracle. Thicker, faster growth. I order every month!"</p><cite>— Yasmine M., Marrakech</cite></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sw reveal" style="text-align:center">
+    <p class="slbl" data-k="ctlbl">Get in Touch</p>
+    <h2 class="stit" data-k="cttit">Ready to start your <em>NutraVie</em> journey?</h2>
+    <p style="margin:1rem auto;max-width:460px;color:var(--muted);line-height:1.8" data-k="ctsub">Order via WhatsApp or Instagram. We deliver across Morocco with Cash on Delivery.</p>
+    <div class="cacts">
+      <a href="https://wa.me/212708042838" target="_blank" class="bwa">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://www.instagram.com/nutra.vie/" target="_blank" class="big">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        @nutra.vie
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fin">
+    <div class="fb">
+      <a href="#" class="logo"><span class="n" style="color:var(--brown-lt)">Nutra</span><span class="v" style="color:var(--green-lt)">Vie</span></a>
+      <p data-k="fdesc">100% certified bio skincare — safe for all ages. Made with love in Morocco.</p>
+    </div>
+    <div class="fc"><h4 data-k="ql">Quick Links</h4><ul><li><a href="#products" data-k="lp">Products</a></li><li><a href="#about" data-k="la">About</a></li><li><a href="#why" data-k="lw">Why NutraVie</a></li><li><a href="#contact" data-k="lc">Contact</a></li></ul></div>
+    <div class="fc"><h4 data-k="cu">Contact</h4><ul><li><a href="https://wa.me/212708042838" target="_blank">+212 708042838</a></li><li><a href="https://www.instagram.com/nutra.vie/" target="_blank">@nutra.vie</a></li><li><a href="#products" data-k="on">Order Now →</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <span>© 2025 <span style="color:var(--brown-lt)">Nutra</span><span style="color:var(--green-lt)">Vie</span> — All rights reserved</span>
+    <div class="slinks">
+      <a href="https://wa.me/212708042838" target="_blank" class="slink" title="WhatsApp"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://www.instagram.com/nutra.vie/" target="_blank" class="slink" title="Instagram"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="ov" id="ov" onclick="toggleCart()"></div>
+<div class="cd" id="cd">
+  <div class="cdh"><h2 data-k="cart">🛍 Your Cart</h2><button class="xb" onclick="toggleCart()">✕</button></div>
+  <div class="citems" id="citems"></div>
+  <div class="cdf" id="cdf" style="display:none">
+    <div class="fr"><span data-k="sub">Subtotal</span><span id="subv">0 DH</span></div>
+    <div class="fr"><span data-k="ship">Shipping</span><span>30 DH</span></div>
+    <div class="tr"><span data-k="tot">Total</span><span id="totv">0 DH</span></div>
+    <div class="codb">📦 <span data-k="cod">Cash on Delivery — Pay when you receive</span></div>
+    <button class="chkb" onclick="openModal()">
+      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span data-k="proc">Proceed to Order</span>
+    </button>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="mo" id="mo">
+  <div class="mbox">
+    <div class="mh"><h2 data-k="mh">Complete Your Order</h2><button class="xb" onclick="closeModal()">✕</button></div>
+    <div class="mb">
+      <div class="mos" id="mos"></div>
+      <div class="fg"><label data-k="fn">Full Name *</label><input id="fn" type="text" placeholder="Fatima Zahra..."></div>
+      <div class="fg"><label data-k="ph">Phone / WhatsApp *</label><input id="ph" type="tel" placeholder="+212 6XX XXX XXX"></div>
+      <div class="fg"><label data-k="cy">City *</label><input id="cy" type="text" placeholder="Casablanca, Rabat..."></div>
+      <div class="fg"><label data-k="adr">Delivery Address *</label><textarea id="adr" placeholder="Street, neighborhood..."></textarea></div>
+      <div class="fg"><label data-k="nt">Notes (optional)</label><textarea id="nt" placeholder="Any special instructions..."></textarea></div>
+      <button class="subb" onclick="sendWA()">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-k="swa">Send Order via WhatsApp</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── TRANSLATIONS ── */
+const T={
+en:{cert:"100% Certified Bio Skincare",h1:"Nature's purest formula for your skin",hs:"Crafted from 100% organic certified ingredients — safe for all skin types, babies & mothers-to-be.",shop:"Shop Now",story:"Our Story",org:"Organic",prods:"Products",cert2:"Certified",t1:"100% Bio Certified",t2:"Safe for Babies",t3:"Safe During Pregnancy",t4:"All Skin Types",t5:"Cash on Delivery",col:"Our Collection",five:"Five Essentials",spf:"SPF 50+",gentle:"Gentle",night:"Night Repair",alum:"Alum-Free",hair:"Hair Growth",suntag:"Sun Protection",clstag:"Daily Cleansing",nighttag:"Night Repair",dtag:"Body Care",hairtag:"Hair Care",d1:"Broad-spectrum mineral SPF 50+. Ultra-light bio formula — no white cast, safe from birth.",d2:"Sulfate-free bio cleanser that melts impurities without stripping moisture. Ideal for sensitive skin.",d3:"Rich bio actives work overnight to restore and plump. Wake up to visibly softer, radiant skin.",d4:"Aluminum-free bio baume that neutralizes odor naturally. Long-lasting freshness for sensitive skin.",d5:"Potent blend of bio-certified oils that stimulates growth and nourishes the scalp root to tip.",add:"Add",slb2:"Our Story",at:"Born from nature, backed by science",ad:"NutraVie was born from a belief that skincare should never compromise. Every formula uses 100% certified bio ingredients — no fillers, no synthetics, no shortcuts.",p1t:"100% Bio",p1d:"Certified organic, ethically sourced",p2t:"Certified Safe",p2d:"Tested for babies & pregnant women",p3t:"All Skin Types",p3d:"From newborns to mature skin",p4t:"Clean Formula",p4d:"Free from parabens & sulfates",wlbl:"Why NutraVie",wtit:"Skincare you can truly trust",w1t:"100% Organic",w1d:"Every ingredient carries full bio certification.",w2t:"Baby Safe",w2d:"Gentle enough for newborns and mothers-to-be.",w3t:"Science-Backed",w3d:"Bio actives clinically selected for efficacy.",w4t:"Cash on Delivery",w4d:"Pay only when your products arrive at your door.",tlbl:"Testimonials",ttit:"What our customers say",r1:'"The sunscreen is incredible — no white cast, safe for my baby. Finally a brand I trust."',r2:'"Used the night cream throughout my pregnancy. My skin has never looked better."',r3:'"The hair oil is a miracle. Thicker, faster growth. I order every month!"',ctlbl:"Get in Touch",cttit:"Ready to start your NutraVie journey?",ctsub:"Order via WhatsApp or Instagram. We deliver across Morocco with Cash on Delivery.",fdesc:"100% certified bio skincare — safe for all ages. Made with love in Morocco.",ql:"Quick Links",lp:"Products",la:"About",lw:"Why NutraVie",lc:"Contact",cu:"Contact",on:"Order Now →",cart:"🛍 Your Cart",emp:"Your cart is empty",sub:"Subtotal",ship:"Shipping",tot:"Total",cod:"Cash on Delivery — Pay when you receive",proc:"Proceed to Order",mh:"Complete Your Order",fn:"Full Name *",ph:"Phone / WhatsApp *",cy:"City *",adr:"Delivery Address *",nt:"Notes (optional)",swa:"Send Order via WhatsApp",added:"Added to cart! ✓"},
+fr:{cert:"Cosmétique Bio 100% Certifié",h1:"La formule la plus pure de la nature pour votre peau",hs:"Conçue avec des ingrédients 100% bio certifiés — adaptée à tous les types de peau, bébés et futures mamans.",shop:"Acheter",story:"Notre Histoire",org:"Bio",prods:"Produits",cert2:"Certifié",t1:"100% Bio Certifié",t2:"Sûr pour Bébés",t3:"Sûr en Grossesse",t4:"Tous Types de Peau",t5:"Paiement à la Livraison",col:"Notre Collection",five:"Cinq Essentiels",spf:"SPF 50+",gentle:"Doux",night:"Soin Nuit",alum:"Sans Alum.",hair:"Croissance",suntag:"Protection Solaire",clstag:"Nettoyage Quotidien",nighttag:"Soin Nuit",dtag:"Soin Corps",hairtag:"Soin Cheveux",d1:"Protection minérale large spectre SPF 50+. Formule bio ultra-légère — sans effet blanc, sûre dès la naissance.",d2:"Nettoyant bio sans sulfates qui dissout les impuretés sans dessécher. Idéal pour les peaux sensibles.",d3:"Actifs bio riches qui travaillent la nuit pour restaurer. Réveillez-vous avec une peau visiblement plus douce.",d4:"Baume déodorant bio sans aluminium. Fraîcheur durable et naturelle pour les peaux sensibles.",d5:"Mélange d'huiles bio qui stimule la croissance et nourrit le cuir chevelu de la racine aux pointes.",add:"Ajouter",slb2:"Notre Histoire",at:"Né de la nature, soutenu par la science",ad:"NutraVie est né d'une conviction que les soins de la peau ne devraient jamais faire de compromis. Chaque formule utilise 100% d'ingrédients bio certifiés.",p1t:"100% Bio",p1d:"Certifié bio, d'origine éthique",p2t:"Certifié Sûr",p2d:"Testé pour bébés et femmes enceintes",p3t:"Tous Types de Peau",p3d:"Des nouveau-nés à la peau mature",p4t:"Formule Propre",p4d:"Sans parabènes ni sulfates",wlbl:"Pourquoi NutraVie",wtit:"Des soins auxquels vous pouvez vraiment faire confiance",w1t:"100% Biologique",w1d:"Chaque ingrédient est certifié bio.",w2t:"Sûr pour Bébés",w2d:"Assez doux pour les nouveau-nés.",w3t:"Fondé sur la Science",w3d:"Actifs bio cliniquement sélectionnés.",w4t:"Paiement à la Livraison",w4d:"Payez uniquement à la réception.",tlbl:"Témoignages",ttit:"Ce que disent nos clientes",r1:'"La crème solaire est incroyable — aucun effet blanc, sûre pour mon bébé."',r2:'"J\'ai utilisé la crème de nuit pendant toute ma grossesse. Résultat incroyable."',r3:'"L\'huile capillaire est miraculeuse. Mes cheveux poussent tellement plus vite !"',ctlbl:"Nous Contacter",cttit:"Prête à commencer votre parcours NutraVie ?",ctsub:"Commandez via WhatsApp ou Instagram. Livraison dans tout le Maroc avec paiement à la livraison.",fdesc:"Cosmétique bio certifié 100% — sûr pour tous les âges. Fabriqué avec amour au Maroc.",ql:"Liens Rapides",lp:"Produits",la:"À propos",lw:"Pourquoi NutraVie",lc:"Contact",cu:"Contact",on:"Commander →",cart:"🛍 Votre Panier",emp:"Votre panier est vide",sub:"Sous-total",ship:"Livraison",tot:"Total",cod:"Paiement à la Livraison — Payez à la réception",proc:"Passer la commande",mh:"Finaliser la Commande",fn:"Nom complet *",ph:"Téléphone / WhatsApp *",cy:"Ville *",adr:"Adresse de livraison *",nt:"Notes (optionnel)",swa:"Envoyer via WhatsApp",added:"Ajouté au panier ! ✓"},
+ar:{cert:"مستحضرات عضوية معتمدة 100%",h1:"أنقى ما قدمته الطبيعة لبشرتك",hs:"مصنوعة من مكونات عضوية معتمدة 100% — آمنة لجميع أنواع البشرة، الرضع والحوامل.",shop:"تسوّق الآن",story:"قصتنا",org:"عضوي",prods:"منتجات",cert2:"معتمد",t1:"معتمد 100% عضوي",t2:"آمن للأطفال",t3:"آمن أثناء الحمل",t4:"جميع أنواع البشرة",t5:"الدفع عند الاستلام",col:"مجموعتنا",five:"خمسة أساسيات",spf:"SPF 50+",gentle:"لطيف",night:"علاج ليلي",alum:"بدون ألومنيوم",hair:"نمو الشعر",suntag:"الحماية من الشمس",clstag:"التنظيف اليومي",nighttag:"إصلاح ليلي",dtag:"العناية بالجسم",hairtag:"العناية بالشعر",d1:"حماية معدنية واسعة الطيف SPF 50+. تركيبة عضوية خفيفة جداً — بدون بقع بيضاء، آمنة منذ الولادة.",d2:"منظف عضوي بدون كبريتات يذيب الشوائب دون سلب الرطوبة. مثالي للبشرة الحساسة.",d3:"مكونات عضوية غنية تعمل ليلاً على استعادة النضارة. استيقظي بجلد ناعم ومشرق.",d4:"بلسم مزيل عضوي بدون ألومنيوم يحيّد الرائحة بشكل طبيعي. نضارة طويلة الأمد.",d5:"مزيج من الزيوت العضوية المعتمدة التي تحفز النمو وتغذي فروة الرأس من الجذر إلى الطرف.",add:"أضف",slb2:"قصتنا",at:"ولدت من الطبيعة، مدعومة بالعلم",ad:"وُلدت NutraVie من إيمان بأن العناية بالبشرة يجب ألا تتنازل. كل تركيبة مصنوعة من مكونات عضوية معتمدة 100%.",p1t:"100% عضوي",p1d:"مكونات عضوية معتمدة ذات مصادر أخلاقية",p2t:"آمن ومعتمد",p2d:"مُختبر للرضع والنساء الحوامل",p3t:"جميع أنواع البشرة",p3d:"من الرضع إلى البشرة الناضجة",p4t:"تركيبة نظيفة",p4d:"خالٍ من البارابين والكبريتات",wlbl:"لماذا نوتراڤي",wtit:"عناية بالبشرة يمكنك الوثوق بها حقاً",w1t:"100% عضوي",w1d:"كل مكوّن يحمل شهادة عضوية كاملة.",w2t:"آمن للأطفال",w2d:"لطيف بما يكفي للمواليد والأمهات الحوامل.",w3t:"مدعوم علمياً",w3d:"مكونات عضوية مختارة سريرياً.",w4t:"الدفع عند الاستلام",w4d:"ادفعي فقط عند وصول منتجاتك.",tlbl:"آراء العملاء",ttit:"ماذا تقول عملاؤنا",r1:'"واقي الشمس رائع — بدون بقع بيضاء، آمن لطفلي. أخيراً وجدت علامة أثق بها."',r2:'"استخدمت كريم الليل طوال فترة حملي. لم تبدُ بشرتي أجمل من هذا قط."',r3:'"زيت الشعر معجزة. شعري أصبح أكثر كثافة وينمو أسرع بكثير. أطلب كل شهر!"',ctlbl:"تواصل معنا",cttit:"مستعدة لبدء رحلتك مع نوتراڤي؟",ctsub:"اطلبي عبر واتساب أو إنستغرام. نوصّل في جميع أنحاء المغرب مع الدفع عند الاستلام.",fdesc:"مستحضرات عضوية معتمدة 100% — آمنة لجميع الأعمار. صُنعت بحب في المغرب.",ql:"روابط سريعة",lp:"المنتجات",la:"من نحن",lw:"لماذا نوتراڤي",lc:"اتصل بنا",cu:"اتصل بنا",on:"اطلب الآن →",cart:"🛍 سلة التسوق",emp:"سلتك فارغة",sub:"المجموع الفرعي",ship:"الشحن",tot:"الإجمالي",cod:"الدفع عند الاستلام — ادفع عند الوصول",proc:"إتمام الطلب",mh:"إتمام الطلب",fn:"الاسم الكامل *",ph:"الهاتف / واتساب *",cy:"المدينة *",adr:"عنوان التوصيل *",nt:"ملاحظات (اختياري)",swa:"إرسال الطلب عبر واتساب",added:"تمت الإضافة! ✓"}
+};
+let lang='en';
+function setLang(l,btn){
+  lang=l;
+  document.documentElement.lang=l;
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.querySelectorAll('.lb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('[data-k]').forEach(el=>{
+    const k=el.dataset.k;if(T[l][k]!==undefined)el.textContent=T[l][k];
+  });
+  renderCart();
+}
+
+/* ── CART ── */
+let cart={};
+function chQ(id,d){const el=document.getElementById('q-'+id);let v=parseInt(el.textContent)+d;if(v<1)v=1;el.textContent=v;}
+function addCart(id,name,price){
+  const qty=parseInt(document.getElementById('q-'+id).textContent);
+  cart[id]?cart[id].qty+=qty:cart[id]={name,price,qty};
+  updateBadge();renderCart();
+  const b=document.getElementById('ab-'+id);b.classList.add('done');setTimeout(()=>b.classList.remove('done'),700);
+  toast(T[lang].added||'Added!');
+}
+function updateBadge(){
+  const n=Object.values(cart).reduce((s,i)=>s+i.qty,0);
+  const b=document.getElementById('cbc');b.style.display=n?'flex':'none';b.textContent=n;
+}
+function cqChange(id,d){if(!cart[id])return;cart[id].qty+=d;if(cart[id].qty<1)delete cart[id];updateBadge();renderCart();}
+function cqRemove(id){delete cart[id];updateBadge();renderCart();}
+function renderCart(){
+  const wrap=document.getElementById('citems'),foot=document.getElementById('cdf');
+  const t=T[lang];const its=Object.entries(cart);
+  if(!its.length){wrap.innerHTML=`<div class="cemp"><svg width="64" height="64" fill="none" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="1.5"/><path d="M22 28h20l-3 12H25L22 28z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="27" cy="44" r="2" fill="currentColor"/><circle cx="37" cy="44" r="2" fill="currentColor"/></svg><p>${t.emp}</p></div>`;foot.style.display='none';return;}
+  let sub=0;
+  wrap.innerHTML=its.map(([id,it])=>{sub+=it.price*it.qty;return`<div class="citem"><div class="ciimg">img</div><div class="cinfo"><p class="ciname">${it.name}</p><p class="ciprice">${it.price} DH × ${it.qty} = ${it.price*it.qty} DH</p><div class="ciq"><button class="ciqb" onclick="cqChange('${id}',-1)">−</button><span class="ciqv">${it.qty}</span><button class="ciqb" onclick="cqChange('${id}',1)">+</button></div></div><button class="rmb" onclick="cqRemove('${id}')">✕</button></div>`;}).join('');
+  document.getElementById('subv').textContent=sub+' DH';
+  document.getElementById('totv').textContent=(sub+30)+' DH';
+  foot.style.display='block';
+  document.querySelectorAll('[data-k]').forEach(el=>{const k=el.dataset.k;if(T[lang][k]!==undefined)el.textContent=T[lang][k];});
+}
+function toggleCart(){document.getElementById('cd').classList.toggle('open');document.getElementById('ov').classList.toggle('show');}
+function openModal(){
+  if(!Object.keys(cart).length)return;
+  const t=T[lang];let rows=Object.values(cart).map(i=>`<div class="mrow"><span>${i.name} × ${i.qty}</span><span>${i.price*i.qty} DH</span></div>`).join('');
+  const sub=Object.values(cart).reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('mos').innerHTML=rows+`<div class="mrow"><span>${t.ship}</span><span>30 DH</span></div><div class="mrow mtot"><span>${t.tot}</span><span>${sub+30} DH</span></div>`;
+  document.getElementById('mo').classList.add('show');
+  document.getElementById('cd').classList.remove('open');document.getElementById('ov').classList.remove('show');
+}
+function closeModal(){document.getElementById('mo').classList.remove('show');}
+function sendWA(){
+  const name=document.getElementById('fn').value.trim();
+  const phone=document.getElementById('ph').value.trim();
+  const city=document.getElementById('cy').value.trim();
+  const addr=document.getElementById('adr').value.trim();
+  const notes=document.getElementById('nt').value.trim();
+  if(!name||!phone||!city){alert('Please fill in required fields / Merci de remplir les champs obligatoires / يرجى ملء الحقول المطلوبة');return;}
+  const sub=Object.values(cart).reduce((s,i)=>s+i.price*i.qty,0);
+  const lines=Object.values(cart).map(i=>`• ${i.name} × ${i.qty} = ${i.price*i.qty} DH`).join('\n');
+  const msg=`🌿 *NutraVie Order*\n\n👤 *${name}*\n📞 ${phone}\n📍 ${city}${addr?'\n🏠 '+addr:''}\n${notes?'📝 '+notes+'\n':''}\n*Commande / Order:*\n${lines}\n\n💰 Sous-total: ${sub} DH\n🚚 Livraison: 30 DH\n✅ *Total: ${sub+30} DH*\n\n📦 Paiement à la livraison / Cash on Delivery`;
+  window.open('https://wa.me/212708042838?text='+encodeURIComponent(msg),'_blank');
+  cart={};updateBadge();renderCart();closeModal();toast('✅ Order sent!');
+}
+let tt;function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2600);}
+
+/* ── SCROLL ── */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>40));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}}),{threshold:.1});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+
+/* init cart render */
+renderCart();
+</script>
+</body>
+</html>
